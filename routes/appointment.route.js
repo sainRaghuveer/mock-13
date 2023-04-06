@@ -50,6 +50,7 @@ appointmentRoute.get("/doctor", async (req, res) => {
 
     try {
         const doctorData = await appointmentModel.find({ name });
+        console.log(doctorData)
         res.send({ "msg": doctorData })
     } catch (error) {
         res.send({ "msg": error.message })
