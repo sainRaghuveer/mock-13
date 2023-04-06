@@ -14,12 +14,12 @@ userRoute.post("/signup", async(req,res)=>{
             res.send("email exist, login please")
         }else{
             bcrypt.hash(password, 5, async(err, hash)=> {
-                if(err){
-                    res.send({"msg":"please enter valid credentials"})
+               if(err){
+                    res.send({"msg":"please enter valid credentials", "status":false})
                 }else{
                     const user=new userModel({email, confirmPassword, password:hash});
                     user.save();
-                    res.send({"msg":"User registered successful"})
+                    res.send({"msg":"User registered successful", "status":true})
                 }
             });
         }
@@ -37,14 +37,14 @@ userRoute.post("/login", async(req,res)=>{
             bcrypt.compare(password, userExist.password, async(err, result)=> {
                 if(result){
                     var token = jwt.sign({userExist: userExist._id}, 'hospital', { expiresIn: "3h" });
-                    res.send({"msg":"user logged in successful", "token":token})
+                    res.send({"msg":"user logged in successful", "token":token, "status":true})
 
                 }else{
-                    res.send({"msg":"Wrong password or email"})
+                    res.send({"msg":"Wrong password or email", "status":false})
                 }
             });
         }else{
-            res.send({"msg":"Wrong email"})
+            res.send({"msg":"Wrong email","status":false})
         }
     }catch(error){
         console.log({"msg":error.message});
