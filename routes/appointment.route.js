@@ -40,7 +40,6 @@ appointmentRoute.get("/filter", async (req, res) => {
             const filterData = await appointmentModel.find({ "specialization": "Psychiatrist" });
             res.send({ "msg": filterData })
         }
-
     } catch (error) {
         res.send({ "msg": error.message })
     }
