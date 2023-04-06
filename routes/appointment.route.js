@@ -4,7 +4,7 @@ const { appointmentModel } = require("../models/appointment.model");
 const appointmentRoute = express.Router();
 
 appointmentRoute.post("/data", (req, res) => {
-    const { name, image, specialization, experience, location, date, slots, fee } = req.body;
+    const { name, image, specialization, experience, location, slots, fee } = req.body;
 
     const appointmentData = new appointmentModel({ name, image, specialization, experience, location, date:new Date(), slots, fee });
 
