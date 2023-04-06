@@ -6,7 +6,7 @@ const appointmentRoute = express.Router();
 appointmentRoute.post("/data", (req, res) => {
     const { name, image, specialization, experience, location, date, slots, fee } = req.body;
 
-    const appointmentData = new appointmentModel({ name, image, specialization, experience, location, date, slots, fee });
+    const appointmentData = new appointmentModel({ name, image, specialization, experience, location, date:new Date(), slots, fee });
 
     appointmentData.save();
     res.send({ "msg": "Appointment data has been added" })
